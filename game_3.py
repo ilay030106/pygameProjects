@@ -56,11 +56,15 @@ LEFT, SCROLL, RIGHT = MOUSE_BUTTONS
 mouse_pos_list = []
 finished = False  # משתנה לשליטה בלולאת המשחק
 
-# לולאת המשחק
+#לולאת המשחק
 while not finished:
+    pygame.mixer.music.load("bg_music_game3.mp3")  # טעינת מוזיקת הרקע
+    pygame.mixer.music.play(-1)
+    pygame.mixer.music.pause()# הפעלת מוזיקת הרקע בלולאה אינסופית
     for event in pygame.event.get():
         if event.type == pygame.QUIT:  # יציאה מהמשחק
             finished = True
+
         elif event.type == pygame.MOUSEBUTTONDOWN:
             match event.button:
                 case 1:  # לחיצה על כפתור שמאלי בעכבר
@@ -75,10 +79,9 @@ while not finished:
                         add_sound.play()  # הפעלת סאונד להוספה
                 case RIGHT:  # לחיצה על כפתור ימני בעכבר
                     if not pygame.mixer.music.get_busy():  # הפעלת המוזיקה אם היא לא מנוגנת
-                        pygame.mixer.music.load("bg_music_game3.mp3")  # טעינת מוזיקת הרקע
-                        pygame.mixer.music.play(-1)  # הפעלת מוזיקת הרקע בלולאה אינסופית
+                        pygame.mixer.music.unpause()
                     else:  # עצירת המוזיקה אם היא כבר מנוגנת
-                        pygame.mixer.music.stop()
+                        pygame.mixer.music.pause()
 
         elif event.type == pygame.KEYDOWN:
             match event.key:
